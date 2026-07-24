@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Database (แต่ละเครื่องมี energy.db ของตัวเอง — db.py สร้างให้อัตโนมัติ)
+*.db
+*.db-journal
+*.db-wal
+
+# Editor / OS / tooling
+.vscode/
+.claude/settings.local.json
+.idea/
+.DS_Store
+Thumbs.db
