@@ -3,7 +3,7 @@
 # ถ้าต้องการ CUDA ให้ลง torch แยกจาก https://pytorch.org/get-started/locally/
 
 torch==2.3.0
-torchvision==0.18.1
+torchvision==0.18.0
 snntorch==0.9.4
 
 PyQt5==5.15.10

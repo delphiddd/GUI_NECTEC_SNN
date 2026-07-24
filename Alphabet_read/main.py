@@ -1,3 +1,4 @@
+import os
 import random
 import sys
 import time
@@ -356,6 +357,21 @@ class MainWindow(QMainWindow):
 
 
 if __name__ == "__main__":
+    # ── Uniform scale-to-fit ──
+    # ให้ทุกจอ/ทุกเครื่องเห็น layout สัดส่วนเดียวกับ design 1100×780 ที่ออกแบบไว้
+    #   1) probe ขนาดจอด้วย QApplication ชั่วคราว
+    #   2) คำนวณ scale = min(กว้าง/design, สูง/design) → พอดีจอเสมอ (จอเล็กย่อ, จอใหญ่ขยาย)
+    #   3) เปิดแอพจริงด้วย QT_SCALE_FACTOR = scale (Qt สเกลทั้ง UI เท่ากันหมด: canvas/ปุ่ม/ฟอนต์)
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)   # กันจอ Windows ที่ scale 125/150%
+    _probe = QApplication(sys.argv)
+    _geo   = _probe.primaryScreen().availableGeometry()
+    _scale = min(_geo.width() / WINDOW_W, _geo.height() / WINDOW_H)
+    _probe.quit()
+    del _probe
+
+    os.environ["QT_SCALE_FACTOR"] = f"{_scale:.4f}"
+    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling, True)
+    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps, True)
     app = QApplication(sys.argv)
     win = MainWindow()
     win.showFullScreen()
